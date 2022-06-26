@@ -9,8 +9,6 @@ export default ConfigRegisterAs({
     port: parseInt(process.env.PORT || '3000'),
     nodeEnv: process.env.NODE_ENV || 'dev',
     swaggerEnabled: process.env.SWAGGER_ENABLED,
-    accessTokenSecretKey: process.env.ACCESS_TOKEN_SECRET_KEY,
-    accessTokenExpiration: process.env.ACCESS_TOKEN_EXPIRATION || '7d',
   }),
   validationSchema: Joi.object().keys({
     name: Joi.string().required(),
@@ -18,8 +16,6 @@ export default ConfigRegisterAs({
     port: Joi.number(),
     nodeEnv: Joi.string(),
     swaggerEnabled: Joi.boolean(),
-    accessTokenSecretKey: Joi.string().required(),
-    accessTokenExpiration: Joi.string(),
   }),
   validationOptions: {
     convert: true,

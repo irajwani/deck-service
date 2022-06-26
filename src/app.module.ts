@@ -1,19 +1,12 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import ConfigurationModule from './Configurations/Config/config.module';
-import DatabaseModule from './Configurations/Database/DatabaseModule';
+import DatabaseModule from './Configurations/Database/databaseModule';
 import { HealthModule } from './Server/Health/health.module';
-import { AuthModule, DeckModule, UserModule } from './Server';
+import { DeckModule } from './Server';
 import LoggerMiddleware from './Common/Middleware/logger.middleware';
 
 @Module({
-  imports: [
-    ConfigurationModule,
-    DatabaseModule,
-    HealthModule,
-    AuthModule,
-    UserModule,
-    DeckModule,
-  ],
+  imports: [ConfigurationModule, DatabaseModule, HealthModule, DeckModule],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

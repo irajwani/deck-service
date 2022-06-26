@@ -36,6 +36,12 @@ const ERRORS = {
     message:
       'Attempting to draw more cards than amount left in deck. Please lower your draw count.',
   },
+  INVALID_DECK: {
+    code: 7,
+    error: 'INVALID_DECK',
+    message:
+      'This deck is broken as it has duplicate cards. Restart the game with a fresh deck.',
+  },
 };
 
 export { ERRORS };

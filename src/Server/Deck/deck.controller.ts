@@ -11,10 +11,8 @@ import {
 } from '@nestjs/common';
 import { DeckService } from './deck.service';
 import { CreateDeckDto } from './Validation/create-deck.dto';
-import { UpdateDeckDto } from './Validation/update-deck.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { TCreatedDeck } from './Types/deck';
 import { DrawCardsDto } from './Validation/draw-cards.dto';
 
 @ApiTags('Deck')
@@ -22,6 +20,7 @@ import { DrawCardsDto } from './Validation/draw-cards.dto';
 export class DeckController {
   constructor(private readonly deckService: DeckService) {}
 
+  // todo: add http codes
   @Post()
   async create(
     @Body() createDeckDto: CreateDeckDto,

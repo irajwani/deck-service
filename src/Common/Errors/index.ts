@@ -43,6 +43,12 @@ export class InvalidDrawException extends HttpException {
   }
 }
 
+export class InvalidDeckException extends HttpException {
+  constructor() {
+    super(ERRORS.INVALID_DECK, HttpStatus.BAD_REQUEST);
+  }
+}
+
 export enum MongooseErrorCodes {
   UniquePropViolation = '11000',
 }

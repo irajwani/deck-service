@@ -1,27 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
 
 import { CreateDeckDto } from './Validation/create-deck.dto';
 import { UpdateDeckDto } from './Validation/update-deck.dto';
 import { IDeck } from './Types/deck';
 import { ICard } from './Types/card';
+import { DrawCardsDto } from './Validation/draw-cards.dto';
+import { DeckRepository } from './deck.repository';
 import DeckLogic from './deck.logic';
 import {
   DeckNotFoundException,
   InternalServerException,
+  InvalidDeckException,
   InvalidDrawException,
 } from '../../Common/Errors';
-
-import { Deck, DeckDocument } from '../../Schemas/deck.schema';
-
-import { DrawCardsDto } from './Validation/draw-cards.dto';
+import { hasDuplicates } from '../../Common/utils';
 
 @Injectable()
 export class DeckService {
-  constructor(
-    @InjectModel(Deck.name) private deckRepository: Model<DeckDocument>,
-  ) {}
+  constructor(private readonly deckRepository: DeckRepository) {}
 
   public async create({ type, isShuffled }: CreateDeckDto): Promise<IDeck> {
     const cards = [...DeckLogic.generateDeck({ type })];
@@ -34,6 +30,7 @@ export class DeckService {
     };
     try {
       const newDeck = await this.deckRepository.create(deck);
+      // todo: format to remove cards
       return newDeck;
     } catch (e) {
       throw new InternalServerException();
@@ -46,7 +43,7 @@ export class DeckService {
 
   async findOne(_id: string): Promise<IDeck> {
     try {
-      const deck = await this.deckRepository.findById(_id).lean();
+      const deck = await this.deckRepository.findById(_id);
       return deck;
     } catch (e) {
       throw new DeckNotFoundException();
@@ -54,12 +51,14 @@ export class DeckService {
   }
 
   async drawCards(_id: string, { count }: DrawCardsDto): Promise<ICard[]> {
-    const deck: IDeck = await this.deckRepository.findById(_id).lean();
+    const deck: IDeck = await this.deckRepository.findById(_id);
     if (!deck) throw new DeckNotFoundException();
     if (deck.remaining < 1) return [];
     if (count > deck.remaining) throw new InvalidDrawException();
+    const cardsDrawn = deck.cards.slice(0, count);
+    if (hasDuplicates(cardsDrawn)) throw new InvalidDeckException();
     try {
-      await this.deckRepository.updateOne(
+      await this.deckRepository.findOneAndUpdate(
         { _id },
         {
           $push: {
@@ -71,7 +70,7 @@ export class DeckService {
           remaining: deck.remaining - count,
         },
       );
-      return deck.cards.slice(0, count);
+      return cardsDrawn;
     } catch (e) {
       throw new InternalServerException();
     }
