@@ -5,10 +5,13 @@ import { ICard } from '../Server/Deck/Types/card';
 
 @Schema({ timestamps: true })
 export class Deck {
-  @Prop({ enum: DeckTypes })
+  @Prop({ unique: true })
+  deckId: string;
+
+  @Prop({ enum: DeckTypes, required: true })
   type: DeckTypes;
 
-  @Prop()
+  @Prop({ required: true })
   isShuffled: boolean;
 
   @Prop()

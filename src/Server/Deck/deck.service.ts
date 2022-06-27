@@ -1,11 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { v4 as uuidv4 } from 'uuid';
 
-import { CreateDeckDto } from './Validation/create-deck.dto';
-import { UpdateDeckDto } from './Validation/update-deck.dto';
-import { IDeck } from './Types/deck';
+import { Deck } from '../../Schemas/deck.schema';
 import { ICard } from './Types/card';
-import { DrawCardsDto } from './Validation/draw-cards.dto';
 import { DeckRepository } from './deck.repository';
+import { CreateDeckDto } from './Validation/create-deck.dto';
+
+import { DrawCardsDto } from './Validation/draw-cards.dto';
 import DeckLogic from './deck.logic';
 import {
   DeckNotFoundException,
@@ -14,15 +15,21 @@ import {
   InvalidDrawException,
 } from '../../Common/Errors';
 import { hasDuplicates } from '../../Common/utils';
+import { TDeckPreview } from './Types/deck';
+import { formatDeckForPreview } from '../../Common/Formatters/deck';
 
 @Injectable()
 export class DeckService {
   constructor(private readonly deckRepository: DeckRepository) {}
 
-  public async create({ type, isShuffled }: CreateDeckDto): Promise<IDeck> {
+  public async create({
+    type,
+    isShuffled,
+  }: CreateDeckDto): Promise<TDeckPreview> {
     const cards = [...DeckLogic.generateDeck({ type })];
     if (isShuffled) DeckLogic.shuffle(cards);
-    const deck = {
+    const deck: Deck = {
+      deckId: uuidv4(),
       type,
       isShuffled,
       cards,
@@ -30,28 +37,24 @@ export class DeckService {
     };
     try {
       const newDeck = await this.deckRepository.create(deck);
-      // todo: format to remove cards
-      return newDeck;
+      const formattedDeck = formatDeckForPreview(newDeck);
+      return formattedDeck;
     } catch (e) {
       throw new InternalServerException();
     }
   }
 
-  findAll() {
-    return `This action returns all deck`;
-  }
-
-  async findOne(_id: string): Promise<IDeck> {
+  async findOne(deckId: string): Promise<Deck> {
     try {
-      const deck = await this.deckRepository.findById(_id);
+      const deck = await this.deckRepository.findOne({ deckId });
       return deck;
     } catch (e) {
       throw new DeckNotFoundException();
     }
   }
 
-  async drawCards(_id: string, { count }: DrawCardsDto): Promise<ICard[]> {
-    const deck: IDeck = await this.deckRepository.findById(_id);
+  async drawCards(deckId: string, { count }: DrawCardsDto): Promise<ICard[]> {
+    const deck: Deck = await this.deckRepository.findOne({ deckId });
     if (!deck) throw new DeckNotFoundException();
     if (deck.remaining < 1) return [];
     if (count > deck.remaining) throw new InvalidDrawException();
@@ -59,7 +62,7 @@ export class DeckService {
     if (hasDuplicates(cardsDrawn)) throw new InvalidDeckException();
     try {
       await this.deckRepository.findOneAndUpdate(
-        { _id },
+        { deckId },
         {
           $push: {
             cards: {
@@ -74,13 +77,5 @@ export class DeckService {
     } catch (e) {
       throw new InternalServerException();
     }
-  }
-
-  update(id: string, updateDeckDto: UpdateDeckDto) {
-    return `This action updates a #${id} deck`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} deck`;
   }
 }

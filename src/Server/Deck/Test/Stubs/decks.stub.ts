@@ -1,10 +1,11 @@
-import { DeckTypes, IDeck } from '../../Types/deck';
+import { DeckTypes } from '../../Types/deck';
 import { cardsStub } from './cards.stub';
+import { Deck } from '../../../../Schemas/deck.schema';
 
-export const decksStub: Record<string, IDeck> = {
+export const decksStub: Record<string, Deck> = {
   // full shuffled deck
   T1: {
-    _id: '61eaaf49be5a795b3050071561eaaf49be5a795b30500715',
+    deckId: 'fa070707-54cf-4a68-8d7e-13529b339793',
     type: DeckTypes.FULL,
     isShuffled: true,
     cards: cardsStub.T1,

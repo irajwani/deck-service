@@ -1,4 +1,6 @@
 export default {
   SHORT_DECK_START: 7,
   FULL_DECK_START: 2,
+  DRAW_CARDS_MIN: 1,
+  DRAW_CARDS_MAX: 52,
 };

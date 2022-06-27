@@ -1,5 +1,5 @@
 import * as Joi from 'joi';
-import { ConfigRegisterAs } from './configRegisterAs';
+import { ConfigRegisterAs } from './config-register-as';
 
 export default ConfigRegisterAs({
   token: 'app',

@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import ConfigurationModule from './Configurations/Config/config.module';
-import DatabaseModule from './Configurations/Database/databaseModule';
+import DatabaseModule from './Configurations/Database/database.module';
 import { HealthModule } from './Server/Health/health.module';
 import { DeckModule } from './Server';
 import LoggerMiddleware from './Common/Middleware/logger.middleware';

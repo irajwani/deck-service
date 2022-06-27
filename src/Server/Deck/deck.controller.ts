@@ -5,9 +5,9 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   HttpStatus,
   Res,
+  HttpCode,
 } from '@nestjs/common';
 import { DeckService } from './deck.service';
 import { CreateDeckDto } from './Validation/create-deck.dto';
@@ -20,31 +20,24 @@ import { DrawCardsDto } from './Validation/draw-cards.dto';
 export class DeckController {
   constructor(private readonly deckService: DeckService) {}
 
-  // todo: add http codes
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   async create(
     @Body() createDeckDto: CreateDeckDto,
-    @Res() response: Response,
+    @Res() response?: Response,
   ) {
-    return this.deckService.create(createDeckDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.deckService.findAll();
+    const deck = await this.deckService.create(createDeckDto);
+    return response.status(HttpStatus.CREATED).json(deck);
   }
 
   @Get(':id')
+  @HttpCode(HttpStatus.OK)
   findOne(@Param('id') deckId: string) {
     return this.deckService.findOne(deckId);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.deckService.remove(+id);
-  }
-
   @Patch(':id')
+  @HttpCode(HttpStatus.OK)
   drawCards(@Param('id') id: string, @Body() drawCardsDto: DrawCardsDto) {
     return this.deckService.drawCards(id, drawCardsDto);
   }

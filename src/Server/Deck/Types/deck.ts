@@ -1,4 +1,5 @@
 import { ICard } from './card';
+import { Deck } from '../../../Schemas/deck.schema';
 
 export enum Suits {
   SPADES = 'SPADES',
@@ -20,11 +21,11 @@ export enum DeckTypes {
 }
 
 export interface IDeck {
-  _id?: string;
+  deckId: string;
   type: DeckTypes;
   isShuffled: boolean;
   cards: ICard[];
   remaining: number;
 }
 
-export type TCreatedDeck = Omit<IDeck, 'cards'>;
+export type TDeckPreview = Omit<Deck, 'cards'>;

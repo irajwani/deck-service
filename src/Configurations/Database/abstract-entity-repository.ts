@@ -9,18 +9,7 @@ export abstract class EntityRepository<T extends Document> {
   ): Promise<T | null> {
     return this.entityModel
       .findOne(entityFilterQuery, {
-        __v: 0,
-        ...projection,
-      })
-      .exec();
-  }
-
-  async findById(
-    _id: string,
-    projection?: Record<string, unknown>,
-  ): Promise<T | null> {
-    return this.entityModel
-      .findById(_id, {
+        _id: 0,
         __v: 0,
         ...projection,
       })
