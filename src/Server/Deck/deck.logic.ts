@@ -2,6 +2,7 @@ import { CreateDeckDto } from './Validation/create-deck.dto';
 import { Court, DeckTypes, Suits } from './Types/deck';
 import Constants from '../../Common/constants';
 import { IDeckGenerator } from './Types/deck-generator';
+import { ICard } from './Types/card';
 
 export default class DeckLogic {
   static generateDeck({ type }: CreateDeckDto): IDeckGenerator {
@@ -24,10 +25,10 @@ export default class DeckLogic {
     };
   }
 
-  static shuffle(deck) {
-    for (let i = deck.length - 1; i > 0; i--) {
+  static shuffle(cards: ICard[]): void {
+    for (let i = cards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [deck[i], deck[j]] = [deck[j], deck[i]];
+      [cards[i], cards[j]] = [cards[j], cards[i]];
     }
   }
 }

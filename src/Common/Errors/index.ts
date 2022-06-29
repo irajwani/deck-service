@@ -19,15 +19,9 @@ export class InsufficientPermissionException extends HttpException {
   }
 }
 
-export class UserDoesNotExistException extends HttpException {
+export class DeckExistsException extends HttpException {
   constructor() {
-    super(ERRORS.USER_DOES_NOT_EXIST, HttpStatus.NOT_FOUND);
-  }
-}
-
-export class UserExistsException extends HttpException {
-  constructor() {
-    super(ERRORS.USER_EXISTS, HttpStatus.BAD_REQUEST);
+    super(ERRORS.DECK_EXISTS, HttpStatus.BAD_REQUEST);
   }
 }
 
@@ -43,9 +37,9 @@ export class InvalidDrawException extends HttpException {
   }
 }
 
-export class InvalidDeckException extends HttpException {
+export class EmptyDeckException extends HttpException {
   constructor() {
-    super(ERRORS.INVALID_DECK, HttpStatus.BAD_REQUEST);
+    super(ERRORS.EMPTY_DECK, HttpStatus.BAD_REQUEST);
   }
 }
 

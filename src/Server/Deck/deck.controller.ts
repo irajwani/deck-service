@@ -11,9 +11,9 @@ import {
 } from '@nestjs/common';
 import { DeckService } from './deck.service';
 import { CreateDeckDto } from './Validation/create-deck.dto';
+import { DrawCardsDto } from './Validation/draw-cards.dto';
 import { ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
-import { DrawCardsDto } from './Validation/draw-cards.dto';
 
 @ApiTags('Deck')
 @Controller('deck')
@@ -21,7 +21,6 @@ export class DeckController {
   constructor(private readonly deckService: DeckService) {}
 
   @Post()
-  @HttpCode(HttpStatus.CREATED)
   async create(
     @Body() createDeckDto: CreateDeckDto,
     @Res() response?: Response,
@@ -32,13 +31,13 @@ export class DeckController {
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  findOne(@Param('id') deckId: string) {
-    return this.deckService.findOne(deckId);
+  findOne(@Param('id') _id: string) {
+    return this.deckService.findOne(_id);
   }
 
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
-  drawCards(@Param('id') id: string, @Body() drawCardsDto: DrawCardsDto) {
-    return this.deckService.drawCards(id, drawCardsDto);
+  drawCards(@Param('id') _id: string, @Body() drawCardsDto: DrawCardsDto) {
+    return this.deckService.drawCards(_id, drawCardsDto);
   }
 }

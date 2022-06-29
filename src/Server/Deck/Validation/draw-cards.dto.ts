@@ -9,6 +9,8 @@ export class DrawCardsDto {
   @ApiProperty({
     name: 'count',
     description: 'Specify how many cards to draw',
+    minimum: Constants.DRAW_CARDS_MIN,
+    maximum: Constants.DRAW_CARDS_MAX,
     example: 4,
   })
   count: number;

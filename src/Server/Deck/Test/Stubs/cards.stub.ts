@@ -2,7 +2,7 @@ import { ICard } from '../../Types/card';
 import { Suits } from '../../Types/deck';
 
 export const cardsStub: Record<string, ICard[]> = {
-  T1: [
+  S1T1: [
     { value: 8, suit: Suits.SPADES, code: '8S' },
     { value: 9, suit: Suits.CLUBS, code: '9C' },
     { value: 'ACE', suit: Suits.SPADES, code: 'AS' },
@@ -56,9 +56,596 @@ export const cardsStub: Record<string, ICard[]> = {
     { value: 'KING', suit: Suits.DIAMONDS, code: 'KD' },
     { value: 3, suit: Suits.HEARTS, code: '3H' },
   ],
-  T4: [
+  S1T2: [
+    { value: 2, suit: Suits.SPADES, code: '2S' },
+    {
+      value: 3,
+      suit: Suits.SPADES,
+      code: '3S',
+    },
+    {
+      value: 4,
+      suit: Suits.SPADES,
+      code: '4S',
+    },
+    {
+      value: 5,
+      suit: Suits.SPADES,
+      code: '5S',
+    },
+    {
+      value: 6,
+      suit: Suits.SPADES,
+      code: '6S',
+    },
+    {
+      value: 7,
+      suit: Suits.SPADES,
+      code: '7S',
+    },
+    {
+      value: 8,
+      suit: Suits.SPADES,
+      code: '8S',
+    },
+    {
+      value: 9,
+      suit: Suits.SPADES,
+      code: '9S',
+    },
+    {
+      value: 10,
+      suit: Suits.SPADES,
+      code: '10S',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.SPADES,
+      code: 'JS',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.SPADES,
+      code: 'QS',
+    },
+    {
+      value: 'KING',
+      suit: Suits.SPADES,
+      code: 'KS',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.SPADES,
+      code: 'AS',
+    },
+    {
+      value: 2,
+      suit: Suits.HEARTS,
+      code: '2H',
+    },
+    {
+      value: 3,
+      suit: Suits.HEARTS,
+      code: '3H',
+    },
+    {
+      value: 4,
+      suit: Suits.HEARTS,
+      code: '4H',
+    },
+    {
+      value: 5,
+      suit: Suits.HEARTS,
+      code: '5H',
+    },
+    {
+      value: 6,
+      suit: Suits.HEARTS,
+      code: '6H',
+    },
+    {
+      value: 7,
+      suit: Suits.HEARTS,
+      code: '7H',
+    },
+    {
+      value: 8,
+      suit: Suits.HEARTS,
+      code: '8H',
+    },
+    {
+      value: 9,
+      suit: Suits.HEARTS,
+      code: '9H',
+    },
+    {
+      value: 10,
+      suit: Suits.HEARTS,
+      code: '10H',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.HEARTS,
+      code: 'JH',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.HEARTS,
+      code: 'QH',
+    },
+    {
+      value: 'KING',
+      suit: Suits.HEARTS,
+      code: 'KH',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.HEARTS,
+      code: 'AH',
+    },
+    {
+      value: 2,
+      suit: Suits.DIAMONDS,
+      code: '2D',
+    },
+    {
+      value: 3,
+      suit: Suits.DIAMONDS,
+      code: '3D',
+    },
+    {
+      value: 4,
+      suit: Suits.DIAMONDS,
+      code: '4D',
+    },
+    {
+      value: 5,
+      suit: Suits.DIAMONDS,
+      code: '5D',
+    },
+    {
+      value: 6,
+      suit: Suits.DIAMONDS,
+      code: '6D',
+    },
+    {
+      value: 7,
+      suit: Suits.DIAMONDS,
+      code: '7D',
+    },
+    {
+      value: 8,
+      suit: Suits.DIAMONDS,
+      code: '8D',
+    },
+    {
+      value: 9,
+      suit: Suits.DIAMONDS,
+      code: '9D',
+    },
+    {
+      value: 10,
+      suit: Suits.DIAMONDS,
+      code: '10D',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.DIAMONDS,
+      code: 'JD',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.DIAMONDS,
+      code: 'QD',
+    },
+    {
+      value: 'KING',
+      suit: Suits.DIAMONDS,
+      code: 'KD',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.DIAMONDS,
+      code: 'AD',
+    },
+    {
+      value: 2,
+      suit: Suits.CLUBS,
+      code: '2C',
+    },
+    {
+      value: 3,
+      suit: Suits.CLUBS,
+      code: '3C',
+    },
+    {
+      value: 4,
+      suit: Suits.CLUBS,
+      code: '4C',
+    },
+    {
+      value: 5,
+      suit: Suits.CLUBS,
+      code: '5C',
+    },
+    {
+      value: 6,
+      suit: Suits.CLUBS,
+      code: '6C',
+    },
+    {
+      value: 7,
+      suit: Suits.CLUBS,
+      code: '7C',
+    },
+    {
+      value: 8,
+      suit: Suits.CLUBS,
+      code: '8C',
+    },
+    {
+      value: 9,
+      suit: Suits.CLUBS,
+      code: '9C',
+    },
+    {
+      value: 10,
+      suit: Suits.CLUBS,
+      code: '10C',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.CLUBS,
+      code: 'JC',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.CLUBS,
+      code: 'QC',
+    },
+    {
+      value: 'KING',
+      suit: Suits.CLUBS,
+      code: 'KC',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.CLUBS,
+      code: 'AC',
+    },
+  ],
+  S1T3: [
+    {
+      value: 9,
+      suit: Suits.HEARTS,
+      code: '9H',
+    },
+    {
+      value: 10,
+      suit: Suits.SPADES,
+      code: '10S',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.SPADES,
+      code: 'JS',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.SPADES,
+      code: 'AS',
+    },
+    {
+      value: 'KING',
+      suit: Suits.HEARTS,
+      code: 'KH',
+    },
+    {
+      value: 8,
+      suit: Suits.HEARTS,
+      code: '8H',
+    },
+    {
+      value: 9,
+      suit: Suits.SPADES,
+      code: '9S',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.DIAMONDS,
+      code: 'JD',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.CLUBS,
+      code: 'JC',
+    },
+    {
+      value: 'KING',
+      suit: Suits.DIAMONDS,
+      code: 'KD',
+    },
+    {
+      value: 10,
+      suit: Suits.HEARTS,
+      code: '10H',
+    },
+    {
+      value: 8,
+      suit: Suits.DIAMONDS,
+      code: '8D',
+    },
+    {
+      value: 9,
+      suit: Suits.CLUBS,
+      code: '9C',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.SPADES,
+      code: 'QS',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.DIAMONDS,
+      code: 'AD',
+    },
+    {
+      value: 8,
+      suit: Suits.CLUBS,
+      code: '8C',
+    },
+    {
+      value: 'KING',
+      suit: Suits.CLUBS,
+      code: 'KC',
+    },
+    {
+      value: 10,
+      suit: Suits.DIAMONDS,
+      code: '10D',
+    },
+    {
+      value: 7,
+      suit: Suits.SPADES,
+      code: '7S',
+    },
+    {
+      value: 7,
+      suit: Suits.HEARTS,
+      code: '7H',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.HEARTS,
+      code: 'QH',
+    },
+    {
+      value: 10,
+      suit: Suits.CLUBS,
+      code: '10C',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.HEARTS,
+      code: 'JH',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.HEARTS,
+      code: 'AH',
+    },
+    {
+      value: 7,
+      suit: Suits.CLUBS,
+      code: '7C',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.CLUBS,
+      code: 'QC',
+    },
+    {
+      value: 9,
+      suit: Suits.DIAMONDS,
+      code: '9D',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.CLUBS,
+      code: 'AC',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.DIAMONDS,
+      code: 'QD',
+    },
+    {
+      value: 'KING',
+      suit: Suits.SPADES,
+      code: 'KS',
+    },
+    {
+      value: 7,
+      suit: Suits.DIAMONDS,
+      code: '7D',
+    },
+    {
+      value: 8,
+      suit: Suits.SPADES,
+      code: '8S',
+    },
+  ],
+  S1T4: [
+    {
+      value: 7,
+      suit: Suits.SPADES,
+      code: '7S',
+    },
+    {
+      value: 8,
+      suit: Suits.SPADES,
+      code: '8S',
+    },
+    {
+      value: 9,
+      suit: Suits.SPADES,
+      code: '9S',
+    },
+    {
+      value: 10,
+      suit: Suits.SPADES,
+      code: '10S',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.SPADES,
+      code: 'JS',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.SPADES,
+      code: 'QS',
+    },
+    {
+      value: 'KING',
+      suit: Suits.SPADES,
+      code: 'KS',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.SPADES,
+      code: 'AS',
+    },
+    {
+      value: 7,
+      suit: Suits.HEARTS,
+      code: '7H',
+    },
+    {
+      value: 8,
+      suit: Suits.HEARTS,
+      code: '8H',
+    },
+    {
+      value: 9,
+      suit: Suits.HEARTS,
+      code: '9H',
+    },
+    {
+      value: 10,
+      suit: Suits.HEARTS,
+      code: '10H',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.HEARTS,
+      code: 'JH',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.HEARTS,
+      code: 'QH',
+    },
+    {
+      value: 'KING',
+      suit: Suits.HEARTS,
+      code: 'KH',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.HEARTS,
+      code: 'AH',
+    },
+    {
+      value: 7,
+      suit: Suits.DIAMONDS,
+      code: '7D',
+    },
+    {
+      value: 8,
+      suit: Suits.DIAMONDS,
+      code: '8D',
+    },
+    {
+      value: 9,
+      suit: Suits.DIAMONDS,
+      code: '9D',
+    },
+    {
+      value: 10,
+      suit: Suits.DIAMONDS,
+      code: '10D',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.DIAMONDS,
+      code: 'JD',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.DIAMONDS,
+      code: 'QD',
+    },
+    {
+      value: 'KING',
+      suit: Suits.DIAMONDS,
+      code: 'KD',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.DIAMONDS,
+      code: 'AD',
+    },
+    {
+      value: 7,
+      suit: Suits.CLUBS,
+      code: '7C',
+    },
+    {
+      value: 8,
+      suit: Suits.CLUBS,
+      code: '8C',
+    },
+    {
+      value: 9,
+      suit: Suits.CLUBS,
+      code: '9C',
+    },
+    {
+      value: 10,
+      suit: Suits.CLUBS,
+      code: '10C',
+    },
+    {
+      value: 'JACK',
+      suit: Suits.CLUBS,
+      code: 'JC',
+    },
+    {
+      value: 'QUEEN',
+      suit: Suits.CLUBS,
+      code: 'QC',
+    },
+    {
+      value: 'KING',
+      suit: Suits.CLUBS,
+      code: 'KC',
+    },
+    {
+      value: 'ACE',
+      suit: Suits.CLUBS,
+      code: 'AC',
+    },
+  ],
+  S2T1: [
     { value: 8, suit: Suits.SPADES, code: '8S' },
     { value: 9, suit: Suits.CLUBS, code: '9C' },
+    { value: 'ACE', suit: Suits.SPADES, code: 'AS' },
+  ],
+  S2T3: [],
+  S2T5: [
+    { value: 'ACE', suit: Suits.SPADES, code: 'AS' },
     { value: 'ACE', suit: Suits.SPADES, code: 'AS' },
   ],
 };

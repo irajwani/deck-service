@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import * as _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Deck } from '../../Schemas/deck.schema';
@@ -9,18 +10,27 @@ import { CreateDeckDto } from './Validation/create-deck.dto';
 import { DrawCardsDto } from './Validation/draw-cards.dto';
 import DeckLogic from './deck.logic';
 import {
+  DeckExistsException,
   DeckNotFoundException,
+  EmptyDeckException,
   InternalServerException,
-  InvalidDeckException,
   InvalidDrawException,
+  MongooseErrorCodes,
 } from '../../Common/Errors';
-import { hasDuplicates } from '../../Common/utils';
 import { TDeckPreview } from './Types/deck';
 import { formatDeckForPreview } from '../../Common/Formatters/deck';
+import { DatabaseService } from '../../Configurations/Database/database.service';
+import { Connection } from 'mongoose';
 
 @Injectable()
 export class DeckService {
-  constructor(private readonly deckRepository: DeckRepository) {}
+  constructor(
+    private readonly deckRepository: DeckRepository,
+    private readonly databaseService: DatabaseService,
+  ) {}
+
+  private readonly dbConnection: Connection =
+    this.databaseService.getDbHandle();
 
   public async create({
     type,
@@ -39,28 +49,31 @@ export class DeckService {
       const newDeck = await this.deckRepository.create(deck);
       const formattedDeck = formatDeckForPreview(newDeck);
       return formattedDeck;
-    } catch (e) {
+    } catch (err) {
+      console.log(err);
+      if (err.code === MongooseErrorCodes.UniquePropViolation) {
+        throw new DeckExistsException();
+      }
       throw new InternalServerException();
     }
   }
 
   async findOne(deckId: string): Promise<Deck> {
-    try {
-      const deck = await this.deckRepository.findOne({ deckId });
-      return deck;
-    } catch (e) {
-      throw new DeckNotFoundException();
-    }
+    const deck = await this.deckRepository.findOne({ deckId });
+    if (!deck) throw new DeckNotFoundException();
+    return deck;
   }
 
   async drawCards(deckId: string, { count }: DrawCardsDto): Promise<ICard[]> {
-    const deck: Deck = await this.deckRepository.findOne({ deckId });
-    if (!deck) throw new DeckNotFoundException();
-    if (deck.remaining < 1) return [];
-    if (count > deck.remaining) throw new InvalidDrawException();
-    const cardsDrawn = deck.cards.slice(0, count);
-    if (hasDuplicates(cardsDrawn)) throw new InvalidDeckException();
+    const session = await this.dbConnection.startSession();
+    session.startTransaction();
     try {
+      const deck: Deck = await this.deckRepository.findOne({ deckId });
+      if (!deck) throw new DeckNotFoundException();
+      if (deck.remaining < 1) throw new EmptyDeckException();
+      if (count > deck.remaining) throw new InvalidDrawException();
+      const cardsDrawn = _.slice(deck.cards, 0, count);
+
       await this.deckRepository.findOneAndUpdate(
         { deckId },
         {
@@ -73,9 +86,13 @@ export class DeckService {
           remaining: deck.remaining - count,
         },
       );
+      await session.commitTransaction();
       return cardsDrawn;
-    } catch (e) {
-      throw new InternalServerException();
+    } catch (err) {
+      await session.abortTransaction();
+      throw err;
+    } finally {
+      await session.endSession();
     }
   }
 }

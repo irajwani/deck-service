@@ -18,7 +18,7 @@ $ docker-compose up
 
 Then proceed to usage section
 
-Alternatively, if you would like to run the app locally, and node_modules fail to install, it might be a node version issue (I used node 12.18.1)
+Alternatively, if you would like to run the app locally, and node_modules fail to install, it might be a node version issue (I used node 16)
 In this case, install nvm with:
 
 ```bash
@@ -29,21 +29,22 @@ Then follow the instructions provided to make 'nvm' command available within you
 Then,
 
 ```bash
-$ nvm install 12.18.1
-$ nvm use 12.18.1
+$ nvm install 16.15.0
+$ nvm use 16.15.0
 $ npm i
 $ npm run dev
 ```
 
-and run a mongo container within docker
-
-Important: Use an IDE like webstorm to set up a run configuration and provide an ENV value for ACCESS_TOKEN_SECRET_KEY
+and run a generic mongo container on port 27017 within docker
 
 ## Usage
 
 Simply visit the [swagger documentation](http://localhost:3000/documentation) to see all available endpoints and their required parameters
 
 You can connect to the mongodb instance within a GUI for mongo with connection string 'mongodb://localhost:27017'
+
+Main DB => db
+Test DB => test-db
 
 ## Standard User Story:
 
