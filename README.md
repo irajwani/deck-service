@@ -16,6 +16,12 @@ $ docker build -t deck-service .
 $ docker-compose up
 ```
 
+To run unit and integration tests:
+
+```bash
+$ npm run test
+```
+
 Then proceed to usage section
 
 Alternatively, if you would like to run the app locally, and node_modules fail to install, it might be a node version issue (I used node 16)
@@ -53,4 +59,4 @@ Test DB => test-db
 - Draw 1 to all cards from a deck
 
 I did not include a user management system/a way to restrict access to routes based on, for example, a JWT token only because that was beyond the requested scope of this assignment
-Additionally, there is no caching of decks as the same deck might be drawn from multiple times at the same instant, which is why a database transaction was used 
+Additionally, there is no caching of decks as the same deck might be drawn from multiple times at the same instant, which is why a database transaction was used.
