@@ -48,4 +48,9 @@ Test DB => test-db
 
 ## Standard User Story:
 
-I've added comments within the code base for any other shortcomings in the system design that would be detrimental in a production grade repo.
+- Create a deck
+- Retrieve a deck
+- Draw 1 to all cards from a deck
+
+I did not include a user management system/a way to restrict access to routes based on, for example, a JWT token only because that was beyond the requested scope of this assignment
+Additionally, there is no caching of decks as the same deck might be drawn from multiple times at the same instant, which is why a database transaction was used 
