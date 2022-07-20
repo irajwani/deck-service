@@ -4,9 +4,9 @@ import { DeckTypes } from '../Server/Deck/Types/deck';
 import { ICard } from '../Server/Deck/Types/card';
 
 @Schema({ timestamps: true })
-export class Deck {
-  @Prop({ unique: true })
-  deckId: string;
+export class IDeck {
+  @Prop({ required: true })
+  _id: string;
 
   @Prop({ enum: DeckTypes, required: true })
   type: DeckTypes;
@@ -21,5 +21,5 @@ export class Deck {
   cards: ICard[];
 }
 
-export type DeckDocument = Deck & Document;
-export const DeckSchema = SchemaFactory.createForClass(Deck);
+export type DeckDocument = IDeck & Document;
+export const DeckSchema = SchemaFactory.createForClass(IDeck);

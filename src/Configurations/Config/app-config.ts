@@ -8,7 +8,7 @@ export default ConfigRegisterAs({
     coreCount: process.env.APP_CORE || '2',
     port: parseInt(process.env.PORT || '3000'),
     nodeEnv: process.env.NODE_ENV || 'dev',
-    swaggerEnabled: process.env.SWAGGER_ENABLED,
+    swaggerEnabled: process.env.SWAGGER_ENABLED || true,
   }),
   validationSchema: Joi.object().keys({
     name: Joi.string().required(),

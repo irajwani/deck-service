@@ -1,4 +1,4 @@
-import { Deck } from '../../../Schemas/deck.schema';
+import { IDeck } from '../../../Schemas/deck.schema';
 
 export enum Suits {
   SPADES = 'SPADES',
@@ -19,4 +19,4 @@ export enum DeckTypes {
   SHORT = 'SHORT',
 }
 
-export type TDeckPreview = Omit<Deck, 'cards'>;
+export type TDeckPreview = Omit<IDeck, 'cards'>;

@@ -46,7 +46,7 @@ describe('DeckController', () => {
 
   describe('GET /:id, Get a deck by _id', () => {
     it('should get the right deck', async () => {
-      const _id = decksStub.S1T1.deckId;
+      const _id = decksStub.S1T1._id;
       const result = await controller.findOne(_id);
       expect(service.findOne).toHaveBeenCalledWith(_id);
       expect(result).toEqual(decksStub.S1T1);
@@ -55,7 +55,7 @@ describe('DeckController', () => {
 
   describe('PATCH /:id, Draw cards from deck', () => {
     it('should successfully draw top 3 cards from specific deck', async () => {
-      const _id = decksStub.S1T1.deckId;
+      const _id = decksStub.S1T1._id;
       const body: DrawCardsDto = { count: 3 };
       const result = await controller.drawCards(_id, body);
       expect(service.drawCards).toHaveBeenCalledWith(_id, body);

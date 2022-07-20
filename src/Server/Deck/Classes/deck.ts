@@ -1,12 +1,16 @@
-import { CreateDeckDto } from './Validation/create-deck.dto';
-import { Court, DeckTypes, Suits } from './Types/deck';
-import Constants from '../../Common/constants';
-import { IDeckGenerator } from './Types/deck-generator';
-import { ICard } from './Types/card';
+import { Court, DeckTypes, Suits } from '../Types/deck';
+import { ICard } from '../Types/card';
+import Constants from '../../../Common/constants';
 
-export default class DeckLogic {
-  static generateDeck({ type }: CreateDeckDto): IDeckGenerator {
-    return {
+export default class Deck {
+  cards: ICard[];
+
+  constructor(type: DeckTypes, isShuffled: boolean) {
+    this.generateDeck(type, isShuffled);
+  }
+
+  private generateDeck(type: DeckTypes, isShuffled): void {
+    const iterableCards = {
       suits: [Suits.SPADES, Suits.HEARTS, Suits.DIAMONDS, Suits.CLUBS],
       court: [Court.JACK, Court.QUEEN, Court.KING, Court.ACE],
       [Symbol.iterator]: function* () {
@@ -23,9 +27,11 @@ export default class DeckLogic {
         }
       },
     };
+    this.cards = [...iterableCards];
+    if (isShuffled) this.shuffle(this.cards);
   }
 
-  static shuffle(cards: ICard[]): void {
+  private shuffle(cards: ICard[]): void {
     for (let i = cards.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [cards[i], cards[j]] = [cards[j], cards[i]];
